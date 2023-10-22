@@ -1,0 +1,22 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- name: Deploykubemanifestswinapp
+  value: kubewinapp  
+
+stages:
+  - stage: Deploy
+    displayName: Deploy stage
+    jobs:
+      - job: Deploykubemanifestswinapp
+        steps:
+          
+          - task: PublishPipelineArtifact@1
+            inputs:
+              targetPath: '$(System.DefaultWorkingDirectory)'
+              artifact: 'manifests-03-winapp'
+              publishLocation: 'pipeline'
